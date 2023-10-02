@@ -1,0 +1,37 @@
+<odoo>
+    <data>
+      <record id="watering_records_view_form" model="ir.ui.view">
+        <field name="name">watering.records.view.form</field>
+        <field name="model">flower.water</field>
+        <field name="arch" type="xml">
+          <form string="Flower Watering Records Form View">
+            <sheet>
+              <group name="flower_info" string="Product Info">
+                  <field name="serial_id"></field>
+              </group>
+              <group name="watering info" string="Watering Info">
+                <group >
+                  <field name="date"></field>
+                </group>
+                <group >
+                  <field name="gardner" attrs="{'invisible': [('rain_watering', '=', True)]}"></field>
+                  <field name="rain_watering" attrs="{'invisible': [('rain_watering', '=', False)]}"></field>
+                </group>
+              </group>
+            </sheet>
+          </form>
+        </field>
+      </record>
+      
+      <record id="watering_records_view_tree" model="ir.ui.view">
+        <field name="name">watering.records.view.tree</field>
+        <field name="model">flower.water</field>
+        <field name="arch" type="xml">
+          <tree string="Flower Watering Records Tree View">
+            <field name="serial_id" optional="show"></field>
+            <field name="date" optional="show"></field>
+          </tree>
+        </field>
+      </record>
+    </data>
+  </odoo>

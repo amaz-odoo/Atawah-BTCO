@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="stock_warehouse_form_inherit_view" model="ir.ui.view">
+            <field name="name">stock.warehouse.form.inherit.view</field>
+            <field name="model">stock.warehouse</field>
+            <field name="inherit_id" ref="stock.view_warehouse"/>
+            <field name="arch" type="xml">
+                <xpath expr="//div[@name='button_box']" position="inside">
+                    <button class="oe_stat_button"
+                            name="get_weather"
+                            icon="fa-sun-o"
+                            type="object"
+                            string="Fetch Weather Info from API">
+                        <div class="o_field_widget o_stat_info">
+                            <span class="o_stat_text text-wrap">Update Weather Info</span>
+                        </div>
+                    </button>
+                </xpath>
+                <xpath expr="//sheet/group/group[last()]" position="after">
+                    <div class="mt-5">
+                        <div>
+                            <h2><i class="fa fa-cloud"></i> Weather Information</h2>
+                        </div>
+                        <field name="weather_ids" class="full-width-tree" options="{'no_create': 1}">
+                            <tree>
+                                <field name="capture_time"/>
+                                <field name="temp"/>
+                                <field name="description"/>
+                                <field name="pressure" optional="hide"/>
+                                <field name="humidity" optional="show"/>
+                                <field name="wind_speed" optional="hide"/>
+                                <field name="rain_volume" optional="show"/>
+                            </tree>
+                        </field>
+                    </div>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>

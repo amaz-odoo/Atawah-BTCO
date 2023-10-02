@@ -1,0 +1,34 @@
+<odoo>
+    <data>
+        <!-- ***** MENU ITEMS ***** -->
+        <!-- Main Menu Item -->
+        <menuitem
+        id="sally_main_menu"
+        name="Flowershop"
+        web_icon="sally,static/description/icon.png"
+        sequence="0"/>
+        
+        <!-- Flowers Main Sub Menu -->
+        <menuitem
+        id="flowers_main_sub_menu"
+        name="Flowers"
+        parent="sally_main_menu"
+        sequence="10"/>
+        
+        <!-- Flowers Sub Menu Items -->
+        <menuitem
+        id="flowers_list_sub_menu"
+        name="Flowers List"
+        action="sally_flowers_action"
+        parent="flowers_main_sub_menu"
+        sequence="20"/>
+
+        <!-- Sale Order Products Sub Menu Items -->
+        <menuitem
+        id="flowers_list_sub_menu_product"
+        name="Flowers List"
+        action="action_flower_product"
+        parent="sale.product_menu_catalog"
+        sequence="25"/>
+    </data>
+</odoo>

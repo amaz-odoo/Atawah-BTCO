@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="0">
+    
+        <record model="ir.module.category" id="module_category_sally">
+            <field name="name">Sally's Flower Shop</field>
+            <field name="description">Category for Sally's Flower Shop</field>
+            <field name="sequence">0</field>
+        </record>
+    
+        <record id="group_sally_manager" model="res.groups">
+            <field name="name">Manager</field>
+            <field name="category_id" ref="module_category_sally"/>
+        </record>
+    
+        <record id="group_sally_gardner" model="res.groups">
+            <field name="name">Gardner</field>
+            <field name="category_id" ref="module_category_sally"/>
+            <field name="implied_ids" eval="[(4, ref('group_sally_manager'))]"/>
+        </record>
+    
+        <record model="ir.rule" id="flower_watering_rule">
+            <field name="name">Flowers Watering rule</field>
+            <field name="model_id" ref="model_stock_lot"/>
+            <field name="domain_force">[(1,'=',1)] if user.user_has_groups('sally.group_sally_gardner') or user.user_has_groups('sally.group_sally_manager') else [('is_flower','=',False)]</field>
+        </record>
+        <record model="ir.rule" id="flower_watering_user_assigned_rule">
+            <field name="name">Flowers Watering (no or current gardner assignrd) rule</field>
+            <field name="model_id" ref="model_stock_lot"/>
+            <field name="groups" eval="[(4, ref('sally.group_sally_gardner')), (4, ref('sally.group_sally_manager'))]"/>
+            <field name="domain_force">['|',('user_ids','=',False),('user_ids','in',user.id)]</field>
+        </record>
+    </data>
+</odoo>
