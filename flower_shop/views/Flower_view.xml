@@ -1,0 +1,83 @@
+<odoo>
+  <data>
+   
+    <record id="flowr_shop_form_view" model="ir.ui.view" >
+         <field name="name" >Flower.Shop.Form.View</field>
+         <field name="model">flower.shop</field>
+         <field name="arch" type="xml">
+            <form>
+                <sheet>
+                  <group>
+                    <group>
+                      <field name="Common_Name"/>
+                      <field name="Scientific_Name"/>
+                      <field name="Watering_Frequency"/>
+                      <field name="Watering_Amount" string="Watering Amount (ml)"/>
+                    </group>
+                    <group>
+                      <field name="Season_Start_Date"/>
+                      <field name="Season_End_Date"/>
+                    </group>
+                  </group>
+                </sheet>
+               
+            </form>
+         </field>
+     </record>
+
+     <record id="flower_shop_tree_view" model="ir.ui.view" >
+       <field name="name">Flower.Shop.Tree.View</field>
+       <field name="model">flower.shop</field>
+       <field name="arch" type="xml">
+         <tree>
+          <field name="Common_Name"/>
+          <field name="Scientific_Name"/>
+        </tree>
+       </field>
+     </record>
+     <record id="flower_shop_window_action" model="ir.actions.act_window">
+       <field name="name">Flower Shop Action</field>
+       <field name="res_model">flower.shop</field>
+       <field name="view_mode">tree,form</field>
+       <field name="domain">[] </field>
+       <field name="context">{}</field>
+       <field name="help" type='html'>
+          <p class="o_view_nocontent_smiling_face">
+            No Records Found!
+          </p>
+       </field>
+     </record>
+  
+     <menuitem 
+        id="flower_icon_menu"
+        name="Flower Shop"
+        sequence="0"
+        web_icon="flower_shop,static/description/icon.png"
+      />
+      <menuitem
+        id="flower_sub_menu"
+        name="Flowers"
+        parent="flower_icon_menu"
+        sequence="10"
+      />
+       <menuitem 
+        id="flower_list_sub_menu"
+        name="Flowrs List"
+        action="flower_shop_window_action"
+        sequence="25"
+        parent="flower_sub_menu"
+        
+      />
+     <menuitem 
+        id="flower_sale_sub_menu"
+        name="Flowrs List"
+        action="action_flower_sale_sub_menu"
+        sequence="25"
+        parent="sale.product_menu_catalog"
+        
+      />
+
+      
+      
+  </data>
+</odoo>

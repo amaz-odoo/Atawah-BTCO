@@ -1,0 +1,57 @@
+<odoo>
+   <data>
+
+   <!--  profit_percentage  -->
+
+        <record id="sale_order_view_inherit" model="ir.ui.view">
+        <field name="name">sale order view inherit</field>
+        <field name="model">sale.order</field>
+        <field name="inherit_id" ref="sale.view_order_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='payment_term_id']" position="after">
+                <field name="profit_percentage" />
+            </xpath>
+        </field>
+    </record>
+  <!--  profit_percentage ^ -->
+
+
+    <record id="action_flower_sale_sub_menu" model="ir.actions.act_window">
+        <field name="name">Flower product</field>
+        <field name="res_model">product.product</field>
+        <field name="view_mode">kanban,tree,form,activity</field>
+        <field name="context" eval="{'default_is_flower': True}"/>
+        <field name="domain" eval="[('is_flower', '=', True)]"/>
+    </record>
+
+    <record id="form_inherit_flower_sale_sub_menu" model="ir.ui.view">
+        <field name="name">product form view inherit</field>
+        <field name="model">product.product</field>
+        <field name="inherit_id" ref="product.product_normal_form_view"/>
+        <field name="arch" type="xml">
+            <xpath expr="//div[@name='options']/span[last()]" position="after">
+              <span class="d-inline-block">
+                <field name="is_flower" on_change="1"/>
+                <label for="is_flower" string="is it flower?" />
+              </span>  
+            </xpath>
+            <xpath expr="//field[@name='categ_id']" position="after">
+                <field name="flower_id" />
+            </xpath>
+        </field>
+    </record>
+     <record id="sale_order_view_inherit" model="ir.ui.view">
+        <field name="name">sale order view inherit</field>
+        <field name="model">sale.order</field>
+        <field name="inherit_id" ref="sale.view_order_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='order_line']/tree/field[@name='product_id']" position="attributes">
+                <attribute name="domain">
+                   [('is_flower', '=', True),('sale_ok', '=', True), '|', ('company_id', '=', False), ('company_id', '=',
+                    parent.company_id), ]
+                </attribute>
+            </xpath>
+        </field>
+    </record>
+   </data>
+</odoo>

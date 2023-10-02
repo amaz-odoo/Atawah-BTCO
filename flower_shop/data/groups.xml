@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <data noupdate="1">
+       <record model="ir.module.category" id="group_manage_access">
+           <field name="name">Group</field>
+           <field name="description">Group Manager</field>
+      </record>
+
+    <record id="group_gardener" model="res.groups">
+        <field name="name">Gardners</field>
+        <field name="category_id" ref="flower_shop.group_manage_access"/>
+    </record>
+
+    <record id="group_views_record_product" model="res.groups">
+        <field name="name">group access</field>
+        <field name="category_id" ref="flower_shop.group_manage_access"/>
+        <field name="implied_ids" eval='[(4,ref("group_views_record_flower"))]'/>
+    </record>
+       
+  
+    <record id="record_rule_flower_shop" model="ir.rule">
+        <field name="name">Record Rule Flower Shop</field>
+        <field name="model_id" ref="model_flower_shop"/>
+        <field name="global" eval="True"/>
+        <field name="domain_force">([(1,'=',1)] if user.user_has_groups('flower_shop.group_gardener')
+         else [('is_flower','=',False)])
+        </field>
+    </record>
+    <record id="access_only_gardners" model="ir.rule">
+        <field name="name">Access Gardners</field>
+        <field name="model_id" ref="model_flower_shop"/>
+        <field name="groups" eval="[(4, ref('flower_shop.group_gardener'))]"/>
+        <field name="domain_force">['|',('user_ids','=',False),('user_ids','in',user.id)]</field>
+    </record>
+  
+    </data>
+</odoo>

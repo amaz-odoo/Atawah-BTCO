@@ -1,0 +1,12 @@
+<odoo>
+    <record id="ir_cron_warehouses" model="ir.cron">
+        <field name="name">Get weather</field>
+        <field name="model_id" ref="model_flower_shop"/>
+        <field name="state">code</field>
+        <field name="code">model.get_weather_all_warehouses()</field>
+        <field name="interval_number">1</field>
+        <field name="interval_type">days</field>
+        <field name="numbercall">-1</field>
+        <field name="active">False</field>
+    </record>
+</odoo>

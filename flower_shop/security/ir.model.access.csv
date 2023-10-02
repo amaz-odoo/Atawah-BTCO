@@ -1,0 +1,4 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+flower_shop,flower_shop,model_flower_shop,base.group_user,1,1,1,1
+flower_water,flower_water,model_flower_water,base.group_user,1,1,1,1
+stock_warehous,stock_warehous,model_stock_warehous,base.group_user,1,1,1,1
