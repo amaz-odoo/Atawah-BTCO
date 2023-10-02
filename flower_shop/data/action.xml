@@ -1,0 +1,42 @@
+<odoo>
+    <data>
+
+        <!--   scheduled action Needs Watering part_6-->
+        <record id="auto_check_needs_watering" model="ir.cron">
+            <field name="name">product automatic check : needs watering</field>
+            <field name="model_id" ref="model_product_product"/>
+            <field name="state">code</field>
+            <field name="active" eval="True"/>
+            <field name="code">model.action_needs_watering()</field>
+            <field name="interval_number">1</field>
+            <field name="interval_type">days</field>
+            <field name="numbercall">-1</field>
+        </record>
+
+        <!--   scheduled action Get Weather Data for All Warehouses (Hourly) part_7-->
+        <record id="check_get_weather_all_warehouses" model="ir.cron">
+            <field name="name">Weather Data for All Warehouses</field>
+            <field name="model_id" ref="model_stock_warehouse"/>
+            <field name="state">code</field>
+            <field name="code">model.get_weather_all_warehouses()</field>
+            <field name="interval_number">1</field>
+            <field name="interval_type">hours</field>
+            <field name="numbercall">-1</field>
+            <field name="active" eval="True"/>
+
+        </record>
+
+        <!--    # Get Weather Forecast (Daily) for each warehouse location part_7 -->
+        <record id="check_get_forecast_all_warehouses" model="ir.cron">
+            <field name="name">Weather Forecast for All Warehouses</field>
+            <field name="model_id" ref="model_stock_warehouse"/>
+            <field name="state">code</field>
+            <field name="code">model.get_forecast_all_warehouses()</field>
+            <field name="interval_number">1</field>
+            <field name="interval_type">days</field>
+            <field name="numbercall">-1</field>
+            <field name="active" eval="True"/>
+        </record>
+
+    </data>
+</odoo>

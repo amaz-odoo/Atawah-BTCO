@@ -1,0 +1,63 @@
+<odoo>
+    <data>
+        <record id="view_product_flower_inherit" model="ir.ui.view">
+            <field name="name">product.product.form</field>
+            <field name="model">product.product</field>
+            <field name="inherit_id" ref="product.product_normal_form_view"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='categ_id']" position="after">
+                    <field name="flower_id"/>
+                    <field name="flower_sequence_id"/>
+                    <field name="gardeners_ids" widget="many2many_tags"/>
+                </xpath>
+
+                <xpath expr="//field[@name='can_be_expensed']" position="attributes">
+                    <attribute name="invisible">1</attribute>
+                </xpath>
+                <xpath expr="//field[@name='can_be_expensed']" position="after">
+                    <field name="is_flower"/>
+                    <label for="is_flower"/>
+                </xpath>
+
+                <xpath expr="//div[hasclass('oe_title')]" position="before">
+                    <field name="needs_watering" invisible="1"/>
+                    <widget name="web_ribbon" title="NEEDS WATERING" bg_color="bg-danger"
+                            attrs="{'invisible': [('needs_watering', '=', False)]}"/>
+                </xpath>
+
+            </field>
+        </record>
+
+        <!--        filter ...search for Is Flower Product?-->
+        <record id="product_template_search_view_inherit" model="ir.ui.view">
+            <field name="name">product.product.search</field>
+            <field name="model">product.product</field>
+            <field name="inherit_id" ref="product.product_search_form_view"/>
+            <field name="arch" type="xml">
+                <filter name="filter_to_expense" position="replace">
+                    <filter string="Is Flower Product" name="filter_is_flower"
+                            domain="[('is_flower', '=', True)]"/>
+                </filter>
+            </field>
+        </record>
+
+
+        <record model="ir.actions.act_window" id="flower_product_action_window">
+            <field name="name">Flowers</field>
+            <field name="res_model">product.product</field>
+            <field name="view_mode">kanban,tree,form,activity</field>
+            <field name="context" eval="{'default_is_flower': True}"/>
+            <field name="domain" eval="[('is_flower', '=', True)]"/>
+        </record>
+
+
+        <menuitem
+                id="menu_sale_new"
+                name="Flower Product"
+                parent="sale.product_menu_catalog"
+                action="flower_product_action_window"
+                sequence="25"
+        />
+    </data>
+</odoo>
+

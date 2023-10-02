@@ -1,0 +1,73 @@
+<odoo>
+    <data>
+        <record id="get_weather_data_view_form" model="ir.ui.view">
+            <field name="name">stock.warehouse</field>
+            <field name="model">stock.warehouse</field>
+            <field name="inherit_id" ref="stock.view_warehouse"/>
+            <field name="arch" type="xml">
+                <xpath expr="//sheet" position="before">
+                    <header>
+                        <button string="Weather Data"
+                                type="object"
+                                name="open_weather_data"
+                                class="oe_highlight"
+                        />
+                    </header>
+                </xpath>
+            </field>
+        </record>
+
+        <!--      stock.warehouse.weather data-->
+        <record id="view_stock_warehouse_weather_form" model="ir.ui.view">
+            <field name="name">stock.warehouse.weather.form</field>
+            <field name="model">stock.warehouse.weather</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <group>
+                            <group>
+                                <field name="warehouse_id"/>
+                                <field name="description"/>
+                                <field name="pressure"/>
+                                <field name="temperature"/>
+                            </group>
+
+                            <group>
+                                <field name="humidity"/>
+                                <field name="wind_speed"/>
+                                <field name="rain_volume"/>
+                                <field name="capture_time"/>
+                            </group>
+
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="view_stock_warehouse_weather_tree" model="ir.ui.view">
+            <field name="name">stock.warehouse.weather.tree</field>
+            <field name="model">stock.warehouse.weather</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="warehouse_id"/>
+                    <field name="description"/>
+                    <field name="pressure"/>
+                    <field name="temperature"/>
+                    <field name="humidity"/>
+                    <field name="wind_speed"/>
+                    <field name="rain_volume"/>
+                    <field name="capture_time"/>
+                </tree>
+            </field>
+        </record>
+
+
+        <record id="action_open_stock_warehouse_weather" model="ir.actions.act_window">
+            <field name="name">Weather Data</field>
+            <field name="res_model">stock.warehouse.weather</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+    </data>
+</odoo>

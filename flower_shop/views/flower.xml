@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<odoo>
+    <record id="view_flower_type_form" model="ir.ui.view">
+        <field name="name">flower.type.form</field>
+        <field name="model">flower.type</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+
+                        <group>
+                            <field name="common_name"/>
+                            <field name="scientific_name"/>
+                            <field name="watering_frequency"/>
+                            <field name="watering_amount"/>
+                        </group>
+
+                        <group>
+                            <field name="sequence_id"/>
+                            <field name="season_start"/>
+                            <field name="season_end"/>
+                        </group>
+
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="view_flower_type_tree" model="ir.ui.view">
+        <field name="name">flower.type.tree</field>
+        <field name="model">flower.type</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="common_name"/>
+                <field name="scientific_name"/>
+                <field name="season_start"/>
+                <field name="season_end"/>
+                <field name="watering_frequency"/>
+                <field name="watering_amount"/>
+            </tree>
+        </field>
+    </record>
+
+    <record model="ir.actions.act_window" id="flower_type_action">
+        <field name="name">Flower</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">flower.type</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+
+    <menuitem name="Flowers" id="menu_flowers_root"
+              action="flower_type_action"
+              web_icon="flower_shop,static/description/icon.png"/>
+
+</odoo>
