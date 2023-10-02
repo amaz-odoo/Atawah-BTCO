@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <template id="flower_shop.flower_sale_order">
+        <t t-call="web.html_container">
+            <t t-set="company" t-value="docs[0].company_id"/>
+            <t t-set="report_header_style" t-value="'display: none;'"/>
+            <t t-set="footer" t-value="'oe_hidden'"/>
+            <t t-call="web.external_layout_boxed">
+                <div class="page" style="page-break-after: always">
+                    <h4 class="text-center" t-out="company.name"/>
+                </div>
+            </t>
+            <t t-foreach="docs" t-as="order">
+                <t t-foreach="order.order_line" t-as="line">
+                    <t t-if="line.product_id.is_flower and line.product_id.flower_id">
+                        <t t-call="web.external_layout_boxed">
+                            <div class="page" style="page-break-after: always">
+                                <t t-set="flower" t-value="line.product_id.flower_id"/>
+                                <strong class="text-center">
+                                    <t t-out="line.product_id.name"/>
+                                </strong>
+                                <table style="font-size: 8px;" class="table table-sm table-borderless w-100">
+                                    <tr>
+                                        <td>
+                                            <strong>Common Name:</strong>
+                                            <t t-out="flower.common_name"/>
+                                        </td>
+                                        <td>
+                                            <strong>Scientific Name:</strong>
+                                            <t t-out="flower.scientific_name"/>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <strong>Season Start:</strong>
+                                            <t t-out="flower.season_start_date"/>
+                                        </td>
+                                        <td>
+                                            <strong>Season End:</strong>
+                                            <t t-out="flower.season_end_date"/>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <strong>Watering Frequency:</strong>
+                                            <t t-out="flower.watering_frequency"/>
+                                        </td>
+                                        <td>
+                                            <strong>Watering Amount (ml):</strong>
+                                            <t t-out="flower.watering_amount"/>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </t>
+                    </t>
+                </t>
+            </t>
+        </t>
+    </template>
+
+    <record id="action_report_flower_sale_order" model="ir.actions.report">
+        <field name="name">Flower Sale Orders</field>
+        <field name="model">sale.order</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">flower_shop.flower_sale_order</field>
+        <field name="report_file">flower_shop.flower_sale_order</field>
+        <field name="binding_model_id" ref="sale.model_sale_order"/>
+        <field name="binding_type">report</field>
+        <field name="paperformat_id" ref="paperformat_flower_sale_order"/>
+    </record>
+</odoo>

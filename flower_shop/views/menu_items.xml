@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <menuitem id="menu_flower_root"
+              name="Flowers"
+              action="action_flower"
+              web_icon="flower_shop,static/description/icon.png"/>
+
+    <menuitem id="menu_flower_products" action="action_flower_product" parent="sale.product_menu_catalog"
+              sequence="2"/>
+</odoo>

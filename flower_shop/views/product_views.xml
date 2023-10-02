@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record id="product_normal_form_view" model="ir.ui.view">
+        <field name="name">product.normal.form.inherit.flower.app</field>
+        <field name="model">product.product</field>
+        <field name="inherit_id" ref="product.product_normal_form_view"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='purchase_ok']/.." position="after">
+                <span class="d-inline-block">
+                    <field name="is_flower"/>
+                    <label for="is_flower"/>
+                </span>
+            </xpath>
+            <xpath expr="//field[@name='categ_id']" position="after">
+                <field name="flower_id" attrs="{'invisible': [('is_flower','=',False)]}"/>
+                <field name="sequence_id" attrs="{'invisible': [('is_flower','=',False)]}"/>
+                <field name="user_ids" widget="many2many_avatar_user" attrs="{'invisible': [('is_flower','=',False)]}"/>
+            </xpath>
+            <xpath expr="//div[hasclass('oe_button_box')]" position="after">
+                <field name="needs_watering" invisible="1"/>
+                <widget name="web_ribbon" title="Needs Watering" bg_color="bg-danger"
+                        attrs="{'invisible': [('needs_watering', '=', False)]}"/>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="action_flower_product" model="ir.actions.act_window">
+        <field name="name">Flower Products</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">product.product</field>
+        <field name="view_mode">kanban,tree,form,activity</field>
+        <field name="context" eval="{'default_is_flower': True}"/>
+        <field name="domain" eval="[('is_flower', '=', True)]"/>
+        <field name="view_id" ref="product.product_product_tree_view"/>
+    </record>
+</odoo>

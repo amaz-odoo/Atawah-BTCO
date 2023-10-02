@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record id="view_warehouse" model="ir.ui.view">
+        <field name="name">view.warehouse.inherit.flower.app</field>
+        <field name="model">stock.warehouse</field>
+        <field name="inherit_id" ref="stock.view_warehouse"/>
+        <field name="arch" type="xml">
+            <xpath expr="//notebook" position="inside">
+                <page name="weather_info" string="Weather Information">
+                    <field name="weather_ids">
+                        <tree>
+                            <field name="temperature"/>
+                            <field name="pressure"/>
+                            <field name="humidity" widget="percentage"/>
+                            <field name="wind_speed"/>
+                            <field name="rain_volume"/>
+                            <field name="description"/>
+                            <field name="capture_time"/>
+                        </tree>
+                    </field>
+                </page>
+            </xpath>
+            <xpath expr="//sheet" position="before">
+                <header>
+                    <button name="get_weather" type="object" string="Get Weather"/>
+                </header>
+            </xpath>
+        </field>
+    </record>
+</odoo>
