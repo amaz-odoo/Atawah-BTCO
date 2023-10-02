@@ -1,0 +1,76 @@
+<odoo>
+    <record id="product_inherited_tree" model="ir.ui.view">
+        <field name="name">product.product_inherited</field> 
+        <field name="model">product.product</field>
+        <field name="inherit_id" ref="product.product_normal_form_view" />
+        <field name="arch" type="xml">
+            <xpath expr="//div[@name='options']//span[2]" position="after">
+                <span class="d-inline-block">
+                    <field name="is_flower" on_change="1"/>
+                    <label for="is_flower"/>
+                </span>
+            </xpath>
+            <xpath expr="//header" position="inside">
+                <field name="needs_watering" invisible="1"/>
+                <widget name="web_ribbon" title="Needs Watering"  bg_color="bg-danger" attrs="{'invisible': [('needs_watering', '=', False)]}" />
+            </xpath>
+            <xpath expr="//field[@name='categ_id']" position="after">
+                <field name='sequence_id' attrs="{'required':[('is_flower','=',True)],'invisible':[('is_flower','=',False)] }" />
+                <field name='flower_ids' attrs="{'required':[('is_flower','=',True)],'invisible':[('is_flower','=',False)] }"/>
+                <field name='user_ids'  attrs="{'required':[('is_flower','=',True)],'invisible':[('is_flower','=',False)] }"/>
+
+            </xpath>
+        </field>
+    </record>
+    
+
+    <record id="sale_order_inherited_form" model="ir.ui.view">
+        <field name="name">sale.order_inherited</field> 
+        <field name="model">sale.order</field>
+        <field name="inherit_id" ref="sale.view_order_form" />
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='order_line']/tree/field[@name='product_id']" position="attributes">
+                <attribute name="domain">[('sale_ok', '=', True), '|', ('company_id', '=', False), ('company_id', '=',
+                    parent.company_id), ('is_flower', '=', True)]
+                </attribute>
+            </xpath>
+        </field>
+    </record> 
+
+    <record id="ircron_need_watering" model="ir.cron">
+        <field name="name">Need watering</field>
+        <field name="model_id" ref="model_product_product"/>
+        <field name="state">code</field>
+        <field name="code">model.action_needs_watering()</field>
+    </record>
+
+
+
+    
+    <record id="floweronly_tree_view" model="ir.actions.act_window">
+        <field name="name">Flowers Product</field>
+        <field name="res_model">product.product</field>
+        <field name="view_mode">kanban,tree,form,activity</field>
+        <field name="domain"  eval="[('is_flower','=',True)]"/>
+        <field name="context"  eval="{'default_is_flower':True}" />
+
+    </record>
+
+
+    <menuitem name="Products-Flower" id="floweronly_menu" parent="sale.product_menu_catalog" action="floweronly_tree_view" sequence='20' />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</odoo>

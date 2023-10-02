@@ -1,0 +1,77 @@
+<odoo>
+
+    <!-- explicit list view definition -->
+
+    <record model="ir.ui.view" id="flowershop_tree_view">
+      <field name="name">FlowerShop</field>
+      <field name="model">flowershop</field>
+      <field name="arch" type="xml">
+        <tree>
+          <field name="sname"/>
+          <field name="cname"/>
+          <field name="season_start"/>
+          <field name="season_end"/>
+          <field name="watering_frq"/>
+          <field name="watering_amount"/>
+        </tree>
+      </field>
+    </record>
+    <record model="ir.ui.view" id="flowerwater_tree_view">
+      <field name="name">Flower Watering</field>
+      <field name="model">flower_water</field>
+      <field name="arch" type="xml">
+        <tree>
+          <field name="serial_id" string="Serial ID"/>
+          <field name="date" string="Date"/>
+        </tree>
+      </field>
+    </record>
+
+
+
+    <record model="ir.ui.view" id="flowershop_form_view">
+      <field name="name">FlowerShop</field>
+      <field name="model">flowershop</field>
+      <field name="arch" type="xml">
+        <form>
+          <sheet>
+            <group>
+              <group>
+                <field name="sname"/>
+                <field name="cname"/>
+                <field name="season_start"/>
+                <field name="season_end"/>
+              </group>
+              <group>
+                <field name="watering_frq"/>
+                <field name="watering_amount"/>
+              </group>
+            </group>
+
+          </sheet>
+        </form>
+      </field>
+    </record>
+
+
+
+    <!-- actions opening views on models -->
+
+    <record model="ir.actions.act_window" id="flowershop_action_window" >
+      <field name="name">Flower</field>
+      <field name="res_model">flowershop</field>
+      <field name="view_mode">tree,form</field>
+    </record>
+
+    <record model="ir.actions.act_window" id="flower_water_action_window">
+      <field name="name">watering dates</field>
+      <field name="res_model">flower_water</field>
+      <field name="view_mode">tree</field>
+    </record>
+
+
+
+    <menuitem name="Flowers" id="flowershop_main_menu" web_icon="flowershop,static/description/flowershop.png" action="flowershop_action_window" />
+
+
+</odoo>
