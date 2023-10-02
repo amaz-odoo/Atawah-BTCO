@@ -1,0 +1,17 @@
+<odoo>
+    <data>
+        <!--        <menuitem id="menu_sally_flower_shop" name="Sally's Flower Shop" sequence="10" web_icon="sally_flower_shop,static/description/icon.png"/>-->
+
+
+        <record id="action_sally_flower" model="ir.actions.act_window">
+            <field name="name">Flowers</field>
+            <field name="res_model">sally.flower</field>
+            <field name="view_mode">tree,form</field>
+            <!-- You can set additional attributes here as needed -->
+        </record>
+
+        <!-- Define a Menu Item -->
+        <menuitem id="menu_sally_flower_shop" name="Sally's Flower Shop" sequence="10" web_icon="sally_flower_shop,static/description/icon.png"/>
+        <menuitem id="menu_sally_flower" name="Flowers" parent="menu_sally_flower_shop" action="action_sally_flower" />
+    </data>
+</odoo>
