@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record id="floweshop.list" model="ir.ui.view">
+      <field name="name">floweshop list</field>
+      <field name="model">floweshop.floweshop</field>
+        <field name="arch" type="xml">
+            <form>
+                <field name = 'flowerName'/>
+                <field name = 'flowerSCName'/>
+                <field name = 'season_start'/>
+                <field name = 'season_end'/>
+                <field name = 'frequenyWatering'/>
+                <field name = 'WateringAmount'/>
+            </form>
+        </field>
+    </record>
+</odoo>
