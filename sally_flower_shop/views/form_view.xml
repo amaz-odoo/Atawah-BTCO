@@ -1,0 +1,28 @@
+<odoo>
+    <data>
+        <record id="view_sally_flower_form" model="ir.ui.view">
+            <field name="name">sally.flower.form</field>
+            <field name="model">sally.flower</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <group>
+                            <group>
+                                <field name="common_name"/>
+                                <field name="scientific_name"/>
+                                <field name="watering_frequency"/>
+                                <field name="watering_amount"/>
+
+                            </group>
+                            <group>
+                                <field name="season_start"/>
+                                <field name="season_end"/>
+                            </group>
+                        </group>
+
+                    </sheet>
+                </form>
+            </field>
+        </record>
+    </data>
+</odoo>
