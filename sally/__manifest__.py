@@ -1,0 +1,45 @@
+# -*- coding: utf-8 -*-
+{
+    'name': "Sally's Flower Shop",
+    'summary': """Sally's Flower Shop""",
+    'description': """
+        This is a practice project for odoo course
+    """,
+    'author': "Hadi Jafari",
+    'website': "https://haadijafari.ir",
+    'category': 'Flower Shop',
+    'version': '1.0.0',
+    'depends': [
+        'base',
+        'product',
+        'sale',
+        'sale_management',
+        'stock',
+        'website',
+        'website_sale',
+        'base_geolocalize',
+    ],
+    'data': [
+        'security/ir.model.access.csv',
+        'security/security.xml',
+        'data/watering_cron.xml',
+        'data/weather_cron.xml',
+        'data/ir.config_parameter.xml',
+        'views/flowers.xml',
+        'views/sale_order_product.xml',
+        'views/watering.xml',
+        'views/stock_lot_view.xml',
+        'views/stock_warehouse.xml',
+        'views/actions.xml',
+        'views/website_template.xml',
+        'views/menus.xml',
+        'reports/sale_order_template.xml',
+    ],
+    'demo': [
+    ],
+    'installable': True,
+    'application': True,
+    'auto_install': False,
+    'license': 'LGPL-3',
+    'sequence': -100,
+}

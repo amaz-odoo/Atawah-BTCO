@@ -1,0 +1,59 @@
+<odoo>
+  <data>
+    <record id="sally_flowers_view_form" model="ir.ui.view">
+      <field name="name">sally.flowers.view.form</field>
+      <field name="model">sally.flowers</field>
+      <field name="arch" type="xml">
+        <form string="Flowers List Form">
+          <sheet>
+            <group name="info" string="Flower's Information">
+              <group>
+                <field name="name"></field>
+                <field name="sci_name"></field>
+                <field name="watering_frequency"
+                help="Unit: Once every determined days"></field>
+                <field name="watering_amount"
+                help="Unit: Milliliters"></field>
+              </group>
+              <group>
+                <field name="season_start"></field>
+                <field name="season_end"></field>
+              </group>
+            </group>
+          </sheet>
+        </form>
+      </field>
+    </record>
+    
+    <record id="sally_flowers_view_tree" model="ir.ui.view">
+      <field name="name">sally.flowers.view.tree</field>
+      <field name="model">sally.flowers</field>
+      <field name="arch" type="xml">
+        <tree string="Flowers List Tree">
+          <field name="name" optional="show"></field>
+          <field name="sci_name" optional="show"></field>
+          <field name="season_start" optional="show"></field>
+          <field name="season_end" optional="show"></field>
+          <field name="watering_amount" optional="hide"></field>
+          <field name="watering_frequency" optional="hide"></field>
+        </tree>
+      </field>
+    </record>
+
+    <record id="sally_flowers_action" model="ir.actions.act_window">
+      <field name="name">Flowers List</field>
+      <field name="res_model">sally.flowers</field>
+      <field name="view_mode">tree,form</field>
+      <field name="domain">[]</field>
+      <field name="context">{}</field>
+      <field name="help" type="html">
+        <p class="o_view_nocontent_smiling_face">
+          No records found...
+        </p>
+        <p>
+          Create a new patient record !
+        </p>
+      </field>
+    </record>
+  </data>
+</odoo>

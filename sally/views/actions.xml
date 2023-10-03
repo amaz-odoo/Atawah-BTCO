@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+    <record id="flower_water_stock_lot_action_server" model="ir.actions.server">
+        <field name="name">water Flower(s)</field>
+        <field name="type">ir.actions.server</field>
+        <field name="model_id" ref="model_stock_lot"/>
+        <field name="binding_model_id" ref="model_stock_lot" />
+        <field name="state">code</field>
+        <field name="code">records.action_water_flower()</field>
+    </record>
+    </data>
+</odoo>

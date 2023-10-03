@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <template id="report_flower_sale_order_document"
+            name="report_flower_sale_order_document">
+            <t t-set="report_header_style" t-value="'display: none;'" />
+            <t t-set="footer" t-value="'oe_hidden'" />
+            <t t-call="web.external_layout">
+                <div class="page d-flex flex-column align-items-center">
+                    <div class="row">
+                        <div class="col-12">
+                            <h1>
+                                <span t-esc="doc.company_id.name" style="font-size: 24px;" />
+                            </h1>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-12">
+                            <h2 style="font-size: 18px;">Flower Order Report</h2>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-12">
+                            <h3 style="font-size: 18px;">Order #: <span t-esc="doc.name" /></h3>
+                        </div>
+                    </div>
+                </div>
+                <t t-foreach="doc.order_line" t-as="line">
+                    <p style="page-break-after:always;"></p>
+                    <div class="page d-flex flex-column">
+                        <table class="table table-striped">
+                            <thead>
+                                <h1 style="font-size: 24px;">
+                                    <t t-esc="line.product_id.name" />
+                                </h1>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>
+                                        <div class="col-6 nowrap">
+                                            <p style="white-space:nowrap;  font-size: 12px;">
+                                                <strong> Common Name: </strong>
+                                                <t t-esc="line.product_id.flower_id.name" />
+                                            </p>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="col-6 nowrap">
+                                            <p style="white-space:nowrap;  font-size: 12px;">
+                                                <strong> Scientific Name: </strong>
+                                                <t t-esc="line.product_id.flower_id.sci_name" />
+                                            </p>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <div class="col-6">
+                                            <p style="white-space:nowrap;  font-size: 12px;">
+                                                <strong> Season Start Date: </strong>
+                                                <t
+                                                    t-esc="line.product_id.flower_id.season_start" />
+                                            </p>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="col-6">
+                                            <p style="white-space:nowrap;  font-size: 12px;">
+                                                <strong> Season End Date: </strong>
+                                                <t t-esc="line.product_id.flower_id.season_end" />
+                                            </p>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <div class="col-6">
+                                            <p style="white-space:nowrap;  font-size: 12px;">
+                                                <strong> Watering Frequency: </strong>
+                                                <t
+                                                    t-esc="line.product_id.flower_id.watering_frequency" />
+                                            </p>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="col-6">
+                                            <p style="white-space:nowrap;  font-size: 12px;">
+                                                <strong> Watering Amount: </strong>
+                                                <t
+                                                    t-esc="line.product_id.flower_id.watering_amount" />
+                                            </p>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </t>
+            </t>
+        </template>
+        <template id="report_flower_sale_order" name="report_flower_sale_order">
+            <t t-call="web.html_container">
+                <t t-foreach="docs" t-as="doc">
+                    <t t-call="sally.report_flower_sale_order_document" />
+                </t>
+            </t>
+        </template>
+
+        <record id="paperformat_flower_sale_order" model="report.paperformat">
+            <field name="name">Custom Flower Sale Order Paper Format</field>
+            <field name="format">custom</field>
+            <field name="page_height">75</field>
+            <field name="page_width">75</field>
+            <field name="margin_top">10</field>
+            <field name="margin_right">0</field>
+            <field name="margin_bottom">0</field>
+            <field name="margin_left">0</field>
+            <field name="dpi">125</field>
+            <field name="orientation">Portrait</field>
+        </record>
+
+        <record id="flower_sale_order_report_action" model="ir.actions.report">
+            <field name="name">Flower Sale Order</field>
+            <field name="model">sale.order</field>
+            <field name="report_type">qweb-pdf</field>
+            <field name="report_name">sally.report_flower_sale_order</field>
+            <field name="report_file">sally.report_flower_sale_order</field>
+            <field name="print_report_name">'Flower Order #%s' % object.name</field>
+            <field name="binding_model_id" ref="sale.model_sale_order" />
+            <field name="binding_type">report</field>
+            <field name="paperformat_id" ref="paperformat_flower_sale_order" />
+        </record>
+    </data>
+
+</odoo>
