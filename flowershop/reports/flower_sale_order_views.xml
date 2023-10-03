@@ -1,0 +1,86 @@
+<odoo>
+    <data>
+        <template id="my_flower_doc">
+            <t t-call="web.external_layout_boxed">
+            <t t-set="company" t-value="docs[0].company_id"/>
+            <t t-set="report_header_style" t-value="'display: none;'"/>
+            <t t-set="footer" t-value="'oe_hidden'"/>
+            <div class="page">
+                <center>
+                    <h1 t-out="company.name"/>
+                </center>
+                    <div style="page-break-before: always;">
+                    </div>
+
+                    <t t-set="lines_to_report" t-value="doc._get_order_lines_to_report()"/>
+                    <t t-foreach="lines_to_report" t-as="line">
+                        <h2 t-out="line.name"/>
+                        <table class="table table-bordered table-sm" style="font-size:10px;">
+                            <tbody>
+                                <tr>
+                                    <td>
+                                          <b>Common name:  </b><t t-out="line.product_id.flower_ids.cname"/>   <br/>
+                                          <b>Season Starts: </b><t t-out="line.product_id.flower_ids.season_start"/><br/>
+                                          <b>watering Frequency: </b><t t-out="line.product_id.flower_ids.watering_frq "/>   <br/>
+                                    </td>               
+                                    <td>
+                                        Scentific name:<t t-out="line.product_id.flower_ids.sname"/><br/>
+                                        Season Ens:<t  t-out="line.product_id.flower_ids.season_end"/><br/>
+                                        Watering Amount(ml):<t t-out="line.product_id.flower_ids.watering_amount"/><br/>
+                                    </td>  
+                                  </tr>
+                                </tbody>
+                        </table>
+                        <div style="page-break-before: always;">
+                        </div>
+                    </t>
+
+
+            </div>
+            </t>
+            
+        </template>
+        <template id="my_flower">
+            <t t-call="web.html_container">
+
+
+            <t t-foreach="docs" t-as='doc'> 
+                <t t-call="flowershop.my_flower_doc"/> 
+            </t>
+            </t>
+        </template>
+                
+        <record id="paperformat_my_flower" model="report.paperformat">
+            <field name="name">Sale Order Flower</field>
+            <field name="default" eval="True"/>
+            <field name="format">custom</field>
+            <field name="page_height">75</field>
+            <field name="page_width">75</field>
+            <field name="orientation">Portrait</field>
+            <field name="margin_top">0</field>
+            <field name="margin_bottom">0</field>
+            <field name="margin_left">0</field>
+            <field name="margin_right">0</field>
+            <field name="header_line" eval="True"/>
+            <field name="header_spacing">3</field>
+            <field name="dpi">90</field>
+        </record>
+
+
+        <record id="report_my_flower" model="ir.actions.report">
+            <field name="name">sale/flower</field>
+            <field name="model">sale.order</field>
+            <field name="report_name">flowershop.my_flower</field>
+            <field name="report_file">flowershop.my_flower</field>
+            <field name="binding_model_id" ref="sale.model_sale_order"/>
+            <field name="binding_type">report</field>
+            <field name="paperformat_id" ref="flowershop.paperformat_my_flower"/>
+        </record>
+
+
+
+
+
+
+    </data>
+</odoo>

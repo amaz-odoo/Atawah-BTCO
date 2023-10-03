@@ -1,0 +1,8 @@
+<odoo>
+    <data>
+        <record model="ir.config_parameter" id="flower_shop.weather_api_key">
+            <field name="key">flower_shop.weather_api_key</field>
+            <field name="value">3c5633038159495d75e40a936aa0b646</field>
+        </record>
+    </data>
+</odoo>
